@@ -2,6 +2,24 @@
 
 using namespace std;
 
+void printBoard(int (&board)[3][3])
+{
+    cout << '\n';
+    for(int y = 0; y < 3; ++y)
+    {
+        for(int x = 0; x < 3; ++x)
+        {
+            if(board[y][x] == 0)
+                cout << "+";
+            else if(board[y][x] == 1)
+                cout << "X";
+            else if(board[y][x] == 2)
+                cout << "O";
+        }
+        cout << '\n';
+    }
+}
+
 int checkWin(int board[3][3])
 {
     int checkO = 0;
@@ -11,37 +29,37 @@ int checkWin(int board[3][3])
     {
         for(int posX = 0; posX < 3; ++posX)
         {
-            if(board[posY][posX] == 1)
+            if(board[posY][posX] == 2)
               ++checkO;
 
-            if(board[posY][posX] == 2)
+            if(board[posY][posX] == 1)
               ++checkX;
         }
         if(checkO == 3)
-            return 1;
+            return 2;
         else
             checkO = 0;
 
         if(checkX == 3)
-            return 2;
+            return 1;
         else
             checkX = 0;
 
         for(int posX = 0; posX < 3; ++posX)
         {
-            if(board[posX][posY] == 1)
+            if(board[posX][posY] == 2)
               ++checkO;
 
-            if(board[posX][posY] == 2)
+            if(board[posX][posY] == 1)
               ++checkX;
         }
         if(checkO == 3)
-            return 1;
+            return 2;
         else
             checkO = 0;
 
         if(checkX == 3)
-            return 2;
+            return 1;
         else
             checkX = 0;
 
@@ -49,37 +67,37 @@ int checkWin(int board[3][3])
 
     for(int pos = 0; pos < 3; ++pos)
     {
-        if(board[pos][pos] == 1)
+        if(board[pos][pos] == 2)
             ++checkO;
 
-        if(board[pos][pos] == 2)
+        if(board[pos][pos] == 1)
             ++checkX;
     }
     if(checkO == 3)
-        return 1;
+        return 2;
     else
         checkO = 0;
 
     if(checkX == 3)
-        return 2;
+        return 1;
     else
         checkX = 0;
 
     for(int pos = 0; pos < 3; ++pos)
     {
-        if(board[pos][2-pos] == 1)
+        if(board[pos][2-pos] == 2)
             ++checkO;
 
-        if(board[pos][2-pos] == 2)
+        if(board[pos][2-pos] == 1)
             ++checkX;
     }
     if(checkO == 3)
-        return 1;
+        return 2;
     else
         checkO = 0;
 
     if(checkX == 3)
-        return 2;
+        return 1;
     else
         checkX = 0;
 
@@ -143,20 +161,7 @@ int main()
     int player = 1;
     while(true)
     {
-        cout << '\n';
-        for(int y = 0; y < 3; ++y)
-        {
-            for(int x = 0; x < 3; ++x)
-            {
-                if(board[y][x] == 0)
-                    cout << "+";
-                else if(board[y][x] == 1)
-                    cout << "X";
-                else if(board[y][x] == 2)
-                    cout << "O";
-            }
-            cout << '\n';
-        }
+        printBoard(board);
 
         placeMove(board, invalidCell, player);
 
@@ -164,18 +169,21 @@ int main()
 
         if(win == 1)
         {
+            printBoard(board);
             cout << "\nplayer 1 has won";
             break;
         }
 
         if(win == 2)
         {
+            printBoard(board);
             cout << "\nplayer 2 has won";
             break;
         }
 
         if(turn == 9)
         {
+            printBoard(board);
             cout << "\nTie";
             break;
         }
