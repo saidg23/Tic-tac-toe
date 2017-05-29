@@ -2,22 +2,67 @@
 
 using namespace std;
 
+void AI()
+{
+    //coming soon
+}
+
+void printMove(int (&board)[3][3], int y, int x)
+{
+    if(board[y][x] == 0)
+        cout << " ";
+    else if(board[y][x] == 1)
+        cout << "X";
+    else if(board[y][x] == 2)
+        cout << "O";
+}
+
 void printBoard(int (&board)[3][3])
 {
-    cout << '\n';
-    for(int y = 0; y < 3; ++y)
+    int yPos = 0;
+    int xPos = 0;
+
+    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+
+    for(int y = 1; y <= 11; ++y)
     {
-        for(int x = 0; x < 3; ++x)
+        cout << "\t\t\t\t\t\t";
+        for(int x = 1; x <= 17; ++x)
         {
-            if(board[y][x] == 0)
-                cout << "+";
-            else if(board[y][x] == 1)
-                cout << "X";
-            else if(board[y][x] == 2)
-                cout << "O";
+            if(y%2 != 0)
+            {
+                if(x < 6 || (x > 6 && x < 12) || x > 12 )
+                    cout << " ";
+                else
+                    cout << "#";
+            }
+
+            else if(y%4 != 0)
+            {
+                if(x < 3 || (x > 3 && x < 6) || (x > 6 && x < 9) || (x > 9 && x < 12) || (x > 12 && x < 15) || x > 15)
+                    cout << " ";
+                else if(x%6 == 0)
+                    cout << "#";
+                else
+                {
+                    printMove(board, yPos, xPos);
+                    ++xPos;
+                    if(xPos == 3)
+                    {
+                        xPos = 0;
+                        ++yPos;
+                    }
+                }
+            }
+
+            else
+                cout << "#";
         }
+
         cout << '\n';
     }
+
+    cout << "\n\n\n\n\n\n\n\n\n";
 }
 
 int checkWin(int board[3][3])
@@ -170,21 +215,21 @@ int main()
         if(win == 1)
         {
             printBoard(board);
-            cout << "\nplayer 1 has won";
+            cout << "\nplayer 1 has won\n";
             break;
         }
 
         if(win == 2)
         {
             printBoard(board);
-            cout << "\nplayer 2 has won";
+            cout << "\nplayer 2 has won\n";
             break;
         }
 
         if(turn == 9)
         {
             printBoard(board);
-            cout << "\nTie";
+            cout << "\nTie\n";
             break;
         }
 
