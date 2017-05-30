@@ -31,7 +31,7 @@ void printBoard(int (&board)[3][3])
         {
             if(y%2 != 0)
             {
-                if(x < 6 || (x > 6 && x < 12) || x > 12 )
+                if(x%6 != 0)
                     cout << " ";
                 else
                     cout << "#";
@@ -39,7 +39,7 @@ void printBoard(int (&board)[3][3])
 
             else if(y%4 != 0)
             {
-                if(x < 3 || (x > 3 && x < 6) || (x > 6 && x < 9) || (x > 9 && x < 12) || (x > 12 && x < 15) || x > 15)
+                if(x%3 != 0)
                     cout << " ";
                 else if(x%6 == 0)
                     cout << "#";
